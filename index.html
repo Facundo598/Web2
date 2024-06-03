@@ -25,36 +25,38 @@
     </script>
 </head>
 <body>
-    <div style="text-align: center;"><h1>Potencia Estimada</h1></div>
+<div style="text-align: center;"><h1>Potencia Estimada</h1></div>
+
+<div class="content">
+<div class="c-naranja">
+      <p>En esta página se intentará ver la Potencia Estimada de TG01 con datos de
+  PS3, P0 y T2, teniendo el día 18/03/2024 la siguiente novedad<br><br>
+  "En el día de la fecha personal de instrumentación y control interviene
+  en el transmisor de presión PT-4080 (P0), en la revisión del transmisor 
+  donde se verifico conexionado y estado de tubin a la atmósfera, encontrando
+  el mismo obstruido/taponeado, al retirar tubin se puede apreciar en HMI la 
+  corrección inmediata del valor de presión, igualándose con la medición del 
+  transmisor P2."<br><br>
+  Posterior a esta novedad se pudo apreciar que la Potencia Activa incremento.
+  Se analizan estas variables en dos partes
+  <ul><li>Primera parte análisis de Potencia Estimada y MWMODEL</li></ul>
+  <ul><li>Segundo parte análisis en el modo que influyen en la Potencia</li></ul>
   
-    <div class="content">
-      <div class="c-naranja">
-	      <p>En esta página se intentará ver la Potencia Estimada de TG01 con datos de
-          PS3, P0 y T2, teniendo el día 18/03/2024 la siguiente novedad<br><br>
-          "En el día de la fecha personal de instrumentación y control interviene
-          en el transmisor de presión PT-4080 (P0), en la revisión del transmisor 
-          donde se verifico conexionado y estado de tubin a la atmósfera, encontrando
-          el mismo obstruido/taponeado, al retirar tubin se puede apreciar en HMI la 
-          corrección inmediata del valor de presión, igualándose con la medición del 
-          transmisor P2."<br><br>
-          Posterior a esta novedad se pudo apreciar que la Potencia Activa incremento.
-          Se analizan estas variables en dos partes
-          <ul><li>Primera parte análisis de Potencia Estimada y MWMODEL</li></ul>
-          <ul><li>Segundo parte análisis en el modo que influyen en la Potencia</li></ul>
-          
-          Si bien estas variables en la primera parte a analizar nos dan un indicio de 
-          la potencia que puede alcanzar TG01 pero en la segunda parte a analizar se 
-          vera la parte de la lógica en la cual estas variables influyen en la decisión 
-          de la Potencia.</p>
-      </div>
-    </div>
+  Si bien estas variables en la primera parte a analizar nos dan un indicio de 
+  la potencia que puede alcanzar TG01 pero en la segunda parte a analizar se 
+  vera la parte de la lógica en la cual estas variables influyen en la decisión 
+  de la Potencia.</p>
+</div>
+</div>
 
-	  <div  style="text-align: center;"><h2 style="margin: 5px 0;">- Diagrama del cálculo de la potencia estimada -</h2></div>
+<div  style="text-align: center;"><h2 style="margin: 5px 0;">- Diagrama del cálculo de la potencia estimada -</h2></div>
+
+<div class="c-gris" onclick="CargarImagen('MWEST.jpg')" ondblclick="CargarImagen('MWEST.jpg')">
+<img src="MWEST1.jpg" alt="Descripción de la imagen" class="responsive-image">
+</div>
 	
-    <div class="c-gris" onclick="CargarImagen('MWEST.jpg')" ondblclick="CargarImagen('MWEST.jpg')">
-    <img src="MWEST1.jpg" alt="Descripción de la imagen" class="responsive-image">
-    </div>
-
+<div  style="text-align: center;"><h2 style="margin: 15px 0;"></h2></div>
+<div  class="c-gris"
     <h1>Calculo Potencia Estimada</h1>
     <form>
       <label for="P0">P0 =</label>
@@ -66,7 +68,7 @@
       <label for="Mwest">POTENCIA ESTIMADA =</label>
       <input type="number" id="Mwest" readonly style="width: 80px;"><br><br>
     </form>
-  
+  </div>
 
   
 </body>
