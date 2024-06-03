@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mi Página Web</title>
+    <style>
+        .responsive-image {display: block;margin: 0 auto;max-width: 80%;height: auto;}
+        .c-naranja {background-color: #fcd1c6;padding: 10px;border-radius: 15px;
+      		max-width: 85%;margin: 0 auto 0 5%; /*S-D-Inf-Iz*/}
+    	.c-gris {background-color: #E3E4E5;padding: 10px;border-radius: 15px;
+        	max-width: 85%;margin: 0 auto 0 5%; /*S-D-Inf-Iz*/}
+    </style>
+    <title>Calculadora de Doble</title>
+	<script>
+        function CargarImagen(url) {window.open(url, '_blank');}
+        function calculo() {
+        var P0 = parseFloat(document.getElementById("P0").value) || 0;
+        var PS3 = parseFloat(document.getElementById("PS3SEL").value) || 0;
+        var T2 = parseFloat(document.getElementById("T2SEL").value) || 0;
+        // Calcular Potencia Estimada
+        var MWEST = ((0.221 * (PS3 / (P0 / 14.696))) - 0.008 * T2 - 26.417) * (P0 / 14.696) + 1.4;
+        MWEST = MWEST.toFixed(3);
+        document.getElementById("Mwest").value = MWEST;}
+    </script>
+</head>
+<body>
+    <div style="text-align: center;"><h1>Potencia Estimada</h1></div>
+  
+    <div class="content">
+      <div class="c-naranja">
+	      <p>En esta página se intentará ver la Potencia Estimada de TG01 con datos de
+          PS3, P0 y T2, teniendo el día 18/03/2024 la siguiente novedad<br><br>
+          "En el día de la fecha personal de instrumentación y control interviene
+          en el transmisor de presión PT-4080 (P0), en la revisión del transmisor 
+          donde se verifico conexionado y estado de tubin a la atmósfera, encontrando
+          el mismo obstruido/taponeado, al retirar tubin se puede apreciar en HMI la 
+          corrección inmediata del valor de presión, igualándose con la medición del 
+          transmisor P2."<br><br>
+          Posterior a esta novedad se pudo apreciar que la Potencia Activa incremento.
+          Se analizan estas variables en dos partes
+          <ul><li>Primera parte análisis de Potencia Estimada y MWMODEL</li></ul>
+          <ul><li>Segundo parte análisis en el modo que influyen en la Potencia</li></ul>
+          
+          Si bien estas variables en la primera parte a analizar nos dan un indicio de 
+          la potencia que puede alcanzar TG01 pero en la segunda parte a analizar se 
+          vera la parte de la lógica en la cual estas variables influyen en la decisión 
+          de la Potencia.</p>
+      </div>
+    </div>
+
+	  <div  style="text-align: center;"><h2 style="margin: 5px 0;">- Diagrama del cálculo de la potencia estimada -</h2></div>
+	
+    <div class="c-gris" onclick="CargarImagen('001-hd.jpg')" ondblclick="CargarImagen('001-hd.jpg')">
+    <img src="001.jpg" alt="Descripción de la imagen" class="responsive-image">
+    </div>
+
+    <h1>Calculo Potencia Estimada</h1>
+    <form>
+      <label for="P0">P0 =</label>
+      <input type="number" id="P0" oninput="calculo()" style="width: 80px;">
+      <label for="PS3SEL">PS3SEL =</label>
+      <input type="number" id="PS3SEL" oninput="calculo()" style="width: 80px;">
+      <label for="T2SEL">T2SEL =</label>
+      <input type="number" id="T2SEL" oninput="calculo()" style="width: 80px;"><br><br>
+      <label for="Mwest">POTENCIA ESTIMADA =</label>
+      <input type="number" id="Mwest" readonly style="width: 80px;"><br><br>
+    </form>
+  
+
+  
+</body>
+</html>
+</html>
