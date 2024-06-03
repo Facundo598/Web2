@@ -54,21 +54,31 @@
 <div class="c-gris" onclick="CargarImagen('MWEST.jpg')" ondblclick="CargarImagen('MWEST.jpg')">
 <img src="MWEST1.jpg" alt="Descripción de la imagen" class="responsive-image">
 </div>
-	
+
+<div  style="text-align: center;"><h2 style="margin: 15px 0;"></h2></div>
+<div class="c-naranja">
+      <p>Para la siguente expresion tomar como referencia los siguientes
+        valores para las siguientes variavles
+        <ul><li>P0SEL [Psi]: 13.28 Min - 13.68 Max</li></ul>
+  		<ul><li>T2SEL [°F]: 42 Min - 86 Max</li></ul>
+  		<ul><li>PS3SEL [Psi]: 485 Min - 555 Max</li></ul>
+        </p>
+</div>
+
 <div  style="text-align: center;"><h2 style="margin: 15px 0;"></h2></div>
 <div  class="c-gris"
-    <h1>Calculo Potencia Estimada</h1>
+  <h1 style="font-weight: bold; font-size: 18px;">Calculo Potencia Estimada</h1><br><br>
     <form>
-      <label for="P0">P0 =</label>
+      <label for="P0">P0 [Psi] =</label>
       <input type="number" id="P0" oninput="calculo()" style="width: 80px;">
-      <label for="PS3SEL">PS3SEL =</label>
+      <label for="PS3SEL">PS3SEL [Psi] =</label>
       <input type="number" id="PS3SEL" oninput="calculo()" style="width: 80px;">
-      <label for="T2SEL">T2SEL =</label>
+      <label for="T2SEL">T2SEL [°F ]=</label>
       <input type="number" id="T2SEL" oninput="calculo()" style="width: 80px;"><br><br>
-      <label for="Mwest">POTENCIA ESTIMADA =</label>
+      <label for="Mwest">POTENCIA ESTIMADA [MW] =</label>
       <input type="number" id="Mwest" readonly style="width: 80px;"><br><br>
     </form>
-  </div>
+</div>
 
   
 </body>
