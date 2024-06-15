@@ -19,8 +19,8 @@
         var PS3 = parseFloat(document.getElementById("PS3SEL").value) || 0;
         var T2 = parseFloat(document.getElementById("T2SEL").value) || 0;
         // Calcular Potencia Estimada
-        // var MWEST = ((0.221 * (PS3 / (P0 / 14.696))) - 0.008 * T2 - 26.417) * (P0 / 14.696) + 1.4;
-	var MWEST = ((0.221 * ((PS3*9/5+32) / ((P0/6.895) / 14.696))) - 0.008 * (T2/6.895) - 26.417) * ((P0//6.895) / 14.696) + 1.4;
+        /* var MWEST = ((0.221 * (PS3 / (P0 / 14.696))) - 0.008 * T2 - 26.417) * (P0 / 14.696) + 1.4;*/
+	var MWEST = ((0.221 * ((PS3* 9/5 + 32) / ((P0/6.895) / 14.696))) - 0.008 * (T2/6.895) - 26.417) * ((P0//6.895) / 14.696) + 1.4;
         MWEST = MWEST.toFixed(3);
         document.getElementById("Mwest").value = MWEST;}
     </script>
