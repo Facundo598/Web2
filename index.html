@@ -18,9 +18,16 @@
         var P0 = parseFloat(document.getElementById("P0").value) || 0;
         var PS3 = parseFloat(document.getElementById("PS3SEL").value) || 0;
         var T2 = parseFloat(document.getElementById("T2SEL").value) || 0;
+
+	// Convertir PS3 y P0 de kPa a psi
+        var PS3_psi = PS3 * 0.145038;
+        var P0_psi = P0 * 0.145038;
+            
+        // Convertir T2 de Celsius a Fahrenheit
+        var T2_F = T2 * 9/5 + 32;
+	
         // Calcular Potencia Estimada
-        /* var MWEST = ((0.221 * (PS3 / (P0 / 14.696))) - 0.008 * T2 - 26.417) * (P0 / 14.696) + 1.4;*/
-	var MWEST = ((0.221 * ((PS3* 9/5 + 32) / ((P0/6.895) / 14.696))) - 0.008 * (T2/6.895) - 26.417) * ((P0//6.895) / 14.696) + 1.4;
+        var MWEST = ((0.221 * (PS3_psi / (P0_psi / 14.696))) - 0.008 * T2_F - 26.417) * (P0_psi / 14.696) + 1.4;
         MWEST = MWEST.toFixed(3);
         document.getElementById("Mwest").value = MWEST;}
     </script>
