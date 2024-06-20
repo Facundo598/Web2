@@ -1,123 +1,120 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>LMS 100</title>
-    <style>
-        .responsive-image {display: block;margin: 0 auto;max-width: 80%;height: auto;}
-        .c-naranja {background-color: #fcd1c6;padding: 10px;border-radius: 15px;
-      		max-width: 85%;margin: 0 auto 0 5%; /*S-D-Inf-Iz*/}
-    	.c-gris {background-color: #E3E4E5;padding: 10px;border-radius: 15px;
-        	max-width: 85%;margin: 0 auto 0 5%; /*S-D-Inf-Iz*/}
-    </style>
-    <title>Calculadora de Doble</title>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Calculadora de Doble</title>
+	<style>
+		.responsive-image {display: block;margin: 0 auto;max-width: 80%;height: auto;}
+		.c-naranja {background-color: #fcd1c6;padding: 10px;border-radius: 15px;
+			    max-width: 85%;margin: 0 auto 0 5%; /*S-D-Inf-Iz*/}
+		.c-gris {background-color: #E3E4E5;padding: 10px;border-radius: 15px;max-width: 85%;
+			 margin: 0 auto 0 5%; /*S-D-Inf-Iz*/}
+	</style>
 	<script>
-        function CargarImagen(url) {window.open(url, '_blank');}
-        function calculo() {
-        var P0 = parseFloat(document.getElementById("P0").value) || 0;
-        var PS3 = parseFloat(document.getElementById("PS3SEL").value) || 0;
-        var T2 = parseFloat(document.getElementById("T2SEL").value) || 0;
-
-	// Convertir PS3 y P0 de kPa a psi
-        var PS3_psi = PS3 * 0.145038;
-        var P0_psi = P0 * 0.145038;
-            
-        // Convertir T2 de Celsius a Fahrenheit
-        var T2_F = T2 * 9/5 + 32;
-	
-        // Calcular Potencia Estimada
-        var MWEST = ((0.221 * (PS3_psi / (P0_psi / 14.696))) - 0.008 * T2_F - 26.417) * (P0_psi / 14.696) + 1.4;
-        MWEST = MWEST.toFixed(3);
-        document.getElementById("Mwest").value = MWEST;}
-    </script>
+		function CargarImagen(url) {window.open(url, '_blank');}
+		function updateValue(sliderId) {
+			let slider = document.getElementById(sliderId);
+		        let sliderValue = parseFloat(slider.value);
+			if (sliderId === 'sliderT2') {document.getElementById('T2Value').textContent = sliderValue;} 
+			else if (sliderId === 'sliderP0') {document.getElementById('P0Value').textContent = sliderValue.toFixed(1);} 
+			else if (sliderId === 'sliderPS3') {document.getElementById('PS3Value').textContent = sliderValue;}
+		
+		        let T2Value = parseFloat(document.getElementById('sliderT2').value);
+		        let P0Value = parseFloat(document.getElementById('sliderP0').value);
+		        let PS3Value = parseFloat(document.getElementById('sliderPS3').value);
+		            
+		        let PS3_psi = PS3Value * 0.145038;
+			let P0_psi = P0Value * 0.145038; 
+		        let T2_F = T2Value * 9/5 + 32;
+		          
+		        let sumValue = ((0.221 * (PS3_psi / (P0_psi / 14.696))) - 0.008 * T2_F - 26.417) * (P0_psi / 14.696) + 1.4;
+			sumValue = sumValue.toFixed(3);
+			
+			document.getElementById('sumValue').textContent = sumValue;}
+		window.onload = function() {
+			updateValue('sliderT2');
+			updateValue('sliderP0');
+			updateValue('sliderPS3');}
+	</script>
 </head>
 <body>
 <div style="text-align: center;"><h1>Potencia Estimada</h1></div>
 
 <div class="content">
-<div class="c-naranja">
-      <p>En esta página se intentará ver la Potencia Estimada de TG01 con datos de
-  PS3, P0 y T2, teniendo el día 18/03/2024 la siguiente novedad<br><br>
-  "En el día de la fecha personal de instrumentación y control interviene
-  en el transmisor de presión PT-4080 (P0), en la revisión del transmisor 
-  donde se verifico conexionado y estado de tubin a la atmósfera, encontrando
-  el mismo obstruido/taponeado, al retirar tubin se puede apreciar en HMI la 
-  corrección inmediata del valor de presión, igualándose con la medición del 
-  transmisor P2."<br><br>
-  Posterior a esta novedad se pudo apreciar que la Potencia Activa incremento.
-  Se analizan estas variables en dos partes
-  <ul><li>Primera parte análisis de Potencia Estimada y MWMODEL</li></ul>
-  <ul><li>Segundo parte análisis en el modo que influyen en la Potencia</li></ul>
-  
-  Si bien estas variables en la primera parte a analizar nos dan un indicio de 
-  la potencia que puede alcanzar TG01 pero en la segunda parte a analizar se 
-  vera la parte de la lógica en la cual estas variables influyen en la decisión 
-  de la Potencia.</p>
-</div>
+    <div class="c-naranja">
+        <p>En esta página se intentará ver la Potencia Estimada de TG01 con datos de PS3, P0 y T2, teniendo el día 18/03/2024 la siguiente novedad<br><br>
+        "En el día de la fecha personal de instrumentación y control interviene en el transmisor de presión PT-4080 (P0), en la revisión del transmisor 
+	donde se verifico conexionado y estado de tubin a la atmósfera, encontrando el mismo obstruido/taponeado, al retirar tubin se puede apreciar en HMI 
+	la corrección inmediata del valor de presión, igualándose con la medición del transmisor P2."<br><br>
+        Posterior a esta novedad se pudo apreciar que la Potencia Activa incremento. Se analizan estas variables en dos partes</p>
+        <ul><li>Primera parte análisis de Potencia Estimada y MWMODEL</li></ul>
+        <ul><li>Segundo parte análisis en el modo que influyen en la Potencia</li></ul>
+        <p>Si bien estas variables en la primera parte a analizar nos dan un indicio de la potencia que puede alcanzar TG01 pero en la segunda parte a 
+	analizar se vera la parte de la lógica en la cual estas variables influyen en la decisión de la Potencia.</p>
+    </div>
 </div>
 
-<div  style="text-align: center;"><h2 style="margin: 5px 0;">- Diagrama del cálculo de la potencia estimada -</h2></div>
+<div style="text-align: center;">
+    <h2 style="margin: 5px 0;">- Diagrama del cálculo de la potencia estimada -</h2>
+</div>
 
 <div class="c-gris" onclick="CargarImagen('MWEST.jpg')" ondblclick="CargarImagen('MWEST.jpg')">
-<img src="MWEST1.jpg" alt="Descripción de la imagen" class="responsive-image">
+    <img src="MWEST1.jpg" alt="Descripción de la imagen" class="responsive-image">
 </div>
 
 <br>
 <div class="c-naranja">
-	<p>Para la siguiente expresión tomar como referencia los siguientes
-        valores para las siguientes variables
-	<ul><li style="white-space: nowrap; display: inline-block; margin-right: 4rem;">
-		P0SEL [KPa]: 91.5 Min - 94.3 Max</li>
+	<p>Para la siguiente expresión tomar como referencia los siguientes valores para las siguientes variables</p>
+	<ul>	<li style="white-space: nowrap; display: inline-block; margin-right: 4rem;">P0SEL [KPa]: 91.5 Min - 94.3 Max</li>
 		<li style="display: inline-block;">[Psi]: 13.27 Min - 13.68 Max</li></ul>
-
-	<ul><li style="white-space: nowrap; display: inline-block; margin-right: 6rem;">
-		T2SEL [°C]: 5.5 Min - 30 Max</li>
-		<li style=" display: inline-block;">[°F]: 42 Min - 86 Max</li></ul>
-
-	<ul><li style="white-space: nowrap; display: inline-block; margin-right: 3rem;">
-		PS3SEL [KPa]: 3344 Min - 3826 Max</li>
+	
+	<ul>	<li style="white-space: nowrap; display: inline-block; margin-right: 6rem;">T2SEL [°C]: 5.5 Min - 30 Max</li>
+		<li style="display: inline-block;">[°F]: 42 Min - 86 Max</li></ul>
+	
+	<ul>	<li style="white-space: nowrap; display: inline-block; margin-right: 3rem;">PS3SEL [KPa]: 3344 Min - 3826 Max</li>
 		<li style="display: inline-block;">[Psi]: 485 Min - 555 Max</li></ul>
-	</p>
 </div>
 
 <br>
-<div  class="c-gris"
-  <h1 style="font-weight: bold; font-size: 18px;">Calculo Potencia Estimada</h1><br><br>
-    <form>
-      <label for="P0">P0 [KPa] =</label>
-      <input type="number" id="P0" oninput="calculo()" style="width: 80px;">
-      <span>&nbsp;&nbsp;</span>
-      <label for="T2SEL">T2SEL [°C ]=</label>
-      <input type="number" id="T2SEL" oninput="calculo()" style="width: 80px;">
-      <span>&nbsp;&nbsp;</span>
-      <label for="PS3SEL">PS3SEL [KPa] =</label>
-      <input type="number" id="PS3SEL" oninput="calculo()" style="width: 80px;">
-      <br><br>
-      <label for="Mwest">POTENCIA ESTIMADA [MW] =</label>
-      <input type="number" id="Mwest" readonly style="width: 80px;">
-    </form>
+<div class="c-gris" style="text-align: center;">
+    <p style="font-weight: bold; font-size: 18px;">Calculo Potencia Estimada</p>
+    <div style="display: inline-block;">
+        <p style="text-align: center;">P0 [kPa] = <span id="P0Value">91.5</span></p>
+        <input type="range" id="sliderP0" min="91.5" max="94.3" step="0.1" value="91.5" oninput="updateValue('sliderP0')">
+    </div>
+    <span>&nbsp;&nbsp;</span>
+    <div style="display: inline-block;">
+        <p style="text-align: center;">T2 [°C] = <span id="T2Value">5.5</span></p>
+        <input type="range" id="sliderT2" min="5.5" max="30" value="5.5" oninput="updateValue('sliderT2')">
+    </div>
+    <span>&nbsp;&nbsp;</span>
+    <div style="display: inline-block;">
+        <p style="text-align: center;">PS3 [kPa] = <span id="PS3Value">3344</span></p>
+        <input type="range" id="sliderPS3" min="3344" max="3826" value="3344" oninput="updateValue('sliderPS3')">
+    </div>
+
+    <h2 style="text-align: center;">Potencia Estimada [MW] = <span id="sumValue">1.400</span></h2>
 </div>
 
-<div  style="text-align: center;"><h2 style="margin: 5px 0;">- Datos Reales de Potencia Estimada -</h2></div>
+<div style="text-align: center;">
+    <h2 style="margin: 5px 0;">- Datos Reales de Potencia Estimada -</h2>
+</div>
 
 <div class="c-gris" onclick="CargarImagen('DatosR.jpg')" ondblclick="CargarImagen('DatosR.jpg')">
-<img src="DatosR1.jpg" alt="Descripción de la imagen" class="responsive-image">
+    <img src="DatosR1.jpg" alt="Descripción de la imagen" class="responsive-image">
 </div>
 
 <br>
 <div class="c-naranja">
-  <p>Se aplico la formula en PI Vison en la siguiente dirección:
-  <ul><li style="font-size: 20px;">\Central Térmica Guemes\LMS100|MWModel1</li></ul>
-        </p>
-</div>
+    <p>Se aplico la formula en PI Vison en la siguiente dirección:</p>
+    <ul><li style="font-size: 20px;">\Central Térmica Guemes\LMS100|MWModel1</li></ul></div>
 
-<div  style="text-align: center;"><h2 style="margin: 5px 0;">- Potencia Activa versus Potencia Estimada -</h2></div>
+<div style="text-align: center;">
+    <h2 style="margin: 5px 0;">- Potencia Activa versus Potencia Estimada -</h2></div>
 
-<div class="c-gris" onclick="CargarImagen('PotenciaVs.jpg')" ondblclick="CargarImagen(PotenciaVs.jpg')">
-<img src="PotenciaVs.jpg" alt="Descripción de la imagen" class="responsive-image">
-</div>
+<div class="c-gris" onclick="CargarImagen('PotenciaVs.jpg')" ondblclick="CargarImagen('PotenciaVs.jpg')">
+    <img src="PotenciaVs.jpg" alt="Descripción de la imagen" class="responsive-image"></div>
 
 </body>
-</html>
 </html>
