@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<title>Formulario PDF y Email</title>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+
+<style>
+body{
+    font-family:Arial;
+    max-width:800px;
+    margin:auto;
+    padding:20px;
+}
+
+input, select, textarea, button{
+    width:100%;
+    padding:10px;
+    margin:5px 0;
+}
+
+.seccion{
+    border:1px solid #ccc;
+    padding:15px;
+    margin-bottom:15px;
+}
+</style>
+</head>
+<body>
+
+<h2>Datos</h2>
+
+<div class="seccion">
+
+<input id="nombre" placeholder="Nombre">
+<input id="dni" placeholder="DNI">
+<input id="apodo" placeholder="Apodo">
+<input id="anio" placeholder="Año">
+
+<select id="opcion">
+    <option>Opción A</option>
+    <option>Opción B</option>
+    <option>Opción C</option>
+</select>
+
+</div>
+
+<h2>Configuración</h2>
+
+<div class="seccion">
+
+<input id="correo" placeholder="correo@ejemplo.com">
+<input id="asunto" value="Datos del formulario">
+
+</div>
+
+<button onclick="crearPDF()">
+Generar PDF
+</button>
+
+<button onclick="enviarCorreo()">
+Enviar por Correo
+</button>
+
+<script>
+
+function obtenerDatos(){
+
+    return `
+Nombre: ${document.getElementById("nombre").value}
+DNI: ${document.getElementById("dni").value}
+Apodo: ${document.getElementById("apodo").value}
+Año: ${document.getElementById("anio").value}
+Opción: ${document.getElementById("opcion").value}
+`;
+
+}
+
+function crearPDF(){
+
+    const { jsPDF } = window.jspdf;
+
+    const doc = new jsPDF();
+
+    doc.text(obtenerDatos(),10,20);
+
+    doc.save("datos.pdf");
+}
+
+function enviarCorreo(){
+
+    const destino =
+        document.getElementById("correo").value;
+
+    const asunto =
+        document.getElementById("asunto").value;
+
+    const cuerpo =
+        encodeURIComponent(obtenerDatos());
+
+    window.location.href =
+        `mailto:${destino}?subject=${encodeURIComponent(asunto)}&body=${cuerpo}`;
+}
+
+</script>
+
+</body>
+</html>
